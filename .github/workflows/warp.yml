@@ -2,6 +2,9 @@
 
 on:
   workflow_dispatch:
+
+permissions:
+  contents: write  # 赋予 GITHUB_TOKEN 推送权限 ✅
   
 jobs:
   deploy:
@@ -11,7 +14,17 @@ jobs:
         - name: Checkout repository
           uses: actions/checkout@v4  # ✅ 确保 checkout 是最新版本
         - run: |
-            wget -O wgcf https://github.com/ViRb3/wgcf/releases/download/v2.2.25/wgcf_2.2.25_freebsd_amd64
+            wget -O wgcf https://github.com/ViRb3/wgcf/releases/download/v2.2.25/wgcf_2.2.25_linux_386
             chmod +x wgcf
             wgcf register
             wgcf generate
+
+        - name: Commit and Push compiled binary
+          run: |
+            git config --local user.email "github-actions[bot]@users.noreply.github.com"
+            git config --local user.name "github-actions[bot]"
+            git add wgcf-profile.conf wgcf-account.toml  # 添加编译后的文件
+            git commit -m "Add compiled binary: add wgcf-profile.conf" || echo "No changes to commit"
+            git push origin main
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # ✅ 确保 GITHUB_TOKEN 被正确传递
