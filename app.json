@@ -182,9 +182,6 @@
     },
     "outbounds":[
         {
-            "protocol":"freedom"
-        },
-        {
             "tag":"WARP",
             "protocol":"wireguard",
             "settings":{
@@ -201,18 +198,5 @@
                 ]
             }
         }
-    ],
-    "routing":{
-        "domainStrategy":"AsIs",
-        "rules":[
-            {
-                "type":"field",
-                "domain":[
-                    "domain:openai.com",
-                    "domain:ai.com"
-                ],
-                "outboundTag":"WARP"
-            }
-        ]
-    }
+    ]
 }
