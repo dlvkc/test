@@ -16,7 +16,7 @@ jobs:
         - run: |
             wget -O wgcf https://github.com/ViRb3/wgcf/releases/download/v2.2.25/wgcf_2.2.25_linux_386
             chmod +x ./wgcf
-            ./wgcf register
+            echo yes | ./wgcf register
             ./wgcf generate
 
         - name: Commit and Push compiled binary
