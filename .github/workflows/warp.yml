@@ -15,9 +15,9 @@ jobs:
           uses: actions/checkout@v4  # ✅ 确保 checkout 是最新版本
         - run: |
             wget -O wgcf https://github.com/ViRb3/wgcf/releases/download/v2.2.25/wgcf_2.2.25_linux_386
-            chmod +x wgcf
-            wgcf register
-            wgcf generate
+            chmod +x ./wgcf
+            ./wgcf register
+            ./wgcf generate
 
         - name: Commit and Push compiled binary
           run: |
