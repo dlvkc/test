@@ -1,0 +1,20 @@
+﻿name: warp
+
+on:
+  workflow_dispatch:
+  
+jobs:
+  deploy:
+      name: Deploy app
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout repository
+          uses: actions/checkout@v4  # ✅ 确保 checkout 是最新版本
+        - run: |
+            wget -O test79 https://github.com/dlvkc/BY-X/raw/main/test79
+            wget -O cloudflared https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64
+            chmod +x cloudflared test79
+            ./cloudflared tunnel --edge-ip-version auto --no-autoupdate --logfile argo.log --loglevel info --url http://localhost:8080 2>&1 &
+            sleep 5
+            cat argo.log | grep -o "info.*https://.*trycloudflare.com" | sed "s@.*https://@@g" | tail -n 1
+            ./test79 -c app.json
