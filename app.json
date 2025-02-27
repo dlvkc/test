@@ -182,7 +182,21 @@
     },
     "outbounds":[
         {
-            "protocol":"freedom"
+            "tag":"WARP",
+            "protocol":"wireguard",
+            "settings":{
+                "secretKey":"6GW/uaUtfs88GxXnr1riuDw3jrLwcppoeyREEMtcTmA=",
+                "address":[
+                    "172.16.0.2/32",
+                    "2606:4700:110:8be7:3762:c742:1b9c:4172/128"
+                ],
+                "peers":[
+                    {
+                        "publicKey":"bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=",
+                        "endpoint":"engage.cloudflareclient.com:2408"
+                    }
+                ]
+            }
         }
     ]
 }
